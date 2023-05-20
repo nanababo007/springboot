@@ -1,0 +1,27 @@
+{"properties": [
+  {
+    "name": "user.upload.path",
+    "type": "java.lang.String",
+    "description": "이미지나 문서 파일 등 업로드 폴더 절대 경로"
+  },
+  {
+    "name": "user.static.css",
+    "type": "java.lang.String",
+    "description": "css 정적 파일들을 저장"
+  },
+  {
+    "name": "user.static.images",
+    "type": "java.lang.String",
+    "description": "이미지 정적 파일들을 저장"
+  },
+  {
+    "name": "user.static.js",
+    "type": "java.lang.String",
+    "description": "자바스크립트 코드 js 정적 파일들을 저장"
+  },
+  {
+    "name": "site.rootpkg.path",
+    "type": "java.lang.String",
+    "description": "사이트 메인 루트 패키지 경로"
+  }
+]}

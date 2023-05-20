@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<body th:fragment="main-body">
+    <div id="adm_wrap">
+        <!--/* 페이지별 컨텐츠 */-->
+        <th:block layout:fragment="content"></th:block>
+    </div>
+
+    <script th:src="@{/js/function.js}"></script>
+    <script th:src="@{/js/jquery-3.6.0.min.js}"></script>
+    <script th:src="@{/js/common.js}"></script>
+    <script src="https://kit.fontawesome.com/79613ae794.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+
+    <th:block layout:fragment="script"></th:block>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<!ELEMENT configuration (appender+,logger+,root)>
+<!ATTLIST configuration debug NMTOKEN #REQUIRED>
+<!ELEMENT appender (encoder)>
+<!ATTLIST appender name NMTOKEN #REQUIRED>
+<!ATTLIST appender class NMTOKEN #REQUIRED>
+<!ELEMENT encoder (charset,Pattern)>
+<!ELEMENT charset (#PCDATA)>
+<!ELEMENT Pattern (#PCDATA)>
+<!ELEMENT logger EMPTY>
+<!ATTLIST logger name NMTOKEN #REQUIRED>
+<!ATTLIST logger level NMTOKEN #REQUIRED>
+<!ATTLIST logger appender-ref NMTOKEN #REQUIRED>
+<!ELEMENT root (appender-ref)>
+<!ATTLIST root level NMTOKEN #REQUIRED>
+<!ELEMENT appender-ref EMPTY>
+<!ATTLIST appender-ref ref NMTOKEN #REQUIRED>

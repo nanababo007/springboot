@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kdhppo.smplcms.dao.MembDao">
+
+	<select id="getMembList" parameterType="MembReqVo" resultType="MembResVo">
+		/* MembDao.getMembList 회원 리스트 조회 */
+		select
+			a.memb_id
+			,a.memb_nm
+			,a.admin_yn
+			,a.use_yn
+			,a.join_dt
+			,a.regdate
+			,ifnull(date_format(a.regdate,'%y-%m-%d'),'') as regdate_str
+			,a.reguser
+			,a.moddate
+			,ifnull(date_format(a.moddate,'%y-%m-%d'),'') as moddate_str
+			,a.moduser
+		from
+			tb_memb_info a
+		where
+			a.del_yn = 'N'
+		order by
+			a.regdate desc
+		limit
+			#{startNum}, #{endNum}
+	</select>
+
+	<select id="getMembInfo" parameterType="MembReqVo" resultType="MembResVo">
+		/* MembDao.getMembInfo 회원 상세정보 조회 */
+		select
+			memb_id
+			<if test='userPw!=null and userPw.equals("1")'>
+			,a.memb_pw
+ 			</if>
+			,memb_nm
+			,admin_yn
+			,use_yn
+			,join_dt
+			,regdate
+			,reguser
+			,moddate
+			,moduser
+			,ifnull(date_format(a.regdate,'%y-%m-%d'),'') as regdate_str
+			,ifnull(date_format(a.moddate,'%y-%m-%d'),'') as moddate_str
+		from
+			tb_memb_info a
+		where
+			a.memb_id=#{membId}
+			and a.del_yn='N'
+			<if test='membPw!=null and !membPw.equals("")'>
+			and a.memb_pw=#{membPw}
+ 			</if>
+	</select>
+
+	<select id="checkMembInfo" parameterType="MembReqVo" resultType="Integer">
+		/* MembDao.checkMembInfo 회원 상세정보 중복 체크 조회 */
+		select
+			count(*) as cnt
+		from
+			tb_memb_info a
+		where
+			a.memb_id = #{membId}
+	</select>
+
+	<insert id="insertMembInfo" parameterType="MembReqVo">
+		/* MembDao.insertMembInfo 회원 정보 등록 */
+		insert into tb_memb_info (
+			memb_id
+			,memb_nm
+			,memb_pw
+			,admin_yn
+			,del_yn
+			,use_yn
+			,join_dt
+			,regdate
+			,reguser
+			,moddate
+			,moduser
+		) values (
+			#{membId}
+			,#{membNm}
+			,#{membPw}
+			,ifnull(#{adminYn},'N')
+			,ifnull(#{delYn},'Y')
+			,ifnull(#{useYn},'N')
+			,#{joinDt}
+			,now()
+			,#{userId}
+			,now()
+			,#{userId}
+		)
+	</insert>
+
+	<update id="updateMembInfo" parameterType="MembReqVo">
+		/* MembDao.updateMembInfo 회원 정보 수정 */
+		update tb_memb_info
+		set
+			moddate=now()
+			,moduser=#{userId}
+			,memb_nm=#{membNm}
+			<if test='membPw!=null and !membPw.equals("")'>
+			,memb_pw=#{membPw}
+			</if>
+			,admin_yn=ifnull(#{adminYn},'N')
+		where
+			memb_id=#{membId}
+	</update>
+
+	<update id="deleteMembInfo" parameterType="MembReqVo">
+		/* MembDao.deleteMembInfo 회원 정보 삭제 */
+		update tb_memb_info
+		set
+			del_yn='Y'
+		where
+			memb_id=#{membId}
+	</update>
+
+</mapper>

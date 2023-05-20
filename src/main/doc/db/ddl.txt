@@ -1,0 +1,44 @@
+-- --------------------------------------------------------
+-- 호스트:                          127.0.0.1
+-- 서버 버전:                        10.4.28-MariaDB - mariadb.org binary distribution
+-- 서버 OS:                        Win64
+-- HeidiSQL 버전:                  12.5.0.6677
+-- --------------------------------------------------------
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+
+-- smplcms 데이터베이스 구조 내보내기
+CREATE DATABASE IF NOT EXISTS `smplcms` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
+USE `smplcms`;
+
+-- 테이블 smplcms.tb_memb_info 구조 내보내기
+CREATE TABLE IF NOT EXISTS `tb_memb_info` (
+  `memb_id` varchar(50) NOT NULL COMMENT '회원 아이디',
+  `memb_nm` varchar(200) DEFAULT NULL COMMENT '회원 이름',
+  `memb_pw` varchar(500) DEFAULT NULL COMMENT '로그인 비밀번호',
+  `admin_yn` varchar(1) DEFAULT 'N' COMMENT '관리자 여부',
+  `del_yn` varchar(1) DEFAULT 'N' COMMENT '삭제 여부',
+  `use_yn` varchar(1) DEFAULT 'Y' COMMENT '사용 여부',
+  `join_dt` varchar(8) DEFAULT NULL COMMENT '가입일자(YYYYMMDD)',
+  `regdate` datetime DEFAULT NULL COMMENT '등록일시',
+  `reguser` varchar(50) DEFAULT NULL COMMENT '등록자',
+  `moddate` datetime DEFAULT NULL COMMENT '수정일시',
+  `moduser` varchar(50) DEFAULT NULL COMMENT '수정자',
+  PRIMARY KEY (`memb_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='회원정보';
+
+-- 테이블 데이터 smplcms.tb_memb_info:~0 rows (대략적) 내보내기
+
+/*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
+/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
+/*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40111 SET SQL_NOTES=IFNULL(@OLD_SQL_NOTES, 1) */;
