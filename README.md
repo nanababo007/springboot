@@ -21,6 +21,6 @@
 # 주요 경로
 - 로그인 페이지 : /login
 - 로그아웃 페이지 : /logout
-- 메인 대시보드 페이지 : /main/dash
+- 메인 대시보드 페이지 : /main/dash.do
 - 샘플 목록 페이지 : /sample/post/list.do
 - 샘플 쓰기 페이지 : /sample/post/write.do
