@@ -72,6 +72,8 @@ public class SecurityConfig {
 		//JWT 필터 체크 등, 사이트 시큐리티 인증관련 필터 등록.
 		//http.addFilterBefore(filter, SiteAuthFilter.class);
 
+		//http.headers().frameOptions().disable();
+
 		return http.build();
     }
 
