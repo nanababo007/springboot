@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/full">
+    <th:block layout:fragment="title">
+        <title>로그인 페이지</title>
+    </th:block>
+
+    <th:block layout:fragment="content">
+        <div class="content">
+            <section>
+			    <form class="form-signin" method="post" action="/memb/login/proc.do">
+			        <p>
+			            <label for="username" class="sr-only">아이디</label>
+			            <input type="text" id="userid" name="userid" class="form-control" placeholder="아이디" required="" autofocus="">
+			        </p>
+			        <p>
+			            <label for="password" class="sr-only">비밀번호</label>
+			            <input type="password" id="userpw" name="userpw" class="form-control" placeholder="비밀번호" required="">
+			        </p>
+			        <button class="btn btn-lg btn-primary btn-block" type="submit">로그인</button>
+			    </form>
+
+			    <form class="form-signin" method="get" action="/view/join">
+			        <button class="btn btn-lg btn-warning btn-block" type="submit">회원가입하기</button>
+			    </form>
+            </section>
+        </div> <!--/* .content */-->
+    </th:block>
+</html>

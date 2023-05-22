@@ -52,8 +52,8 @@ public class SecurityConfig {
 				.anyRequest().authenticated() //.authenticated() , .anonymous()
 			)
 			.formLogin(login -> login
-				//.loginPage("/memb/login/login.do") //이 라인 주석시, 기본 시큐리티 로그인 페이지 이동.
-				//.loginProcessingUrl("/login-process") //로그인 처리를 직접 해야됨.
+				.loginPage("/memb/login/form.do") //이 라인 주석시, 기본 시큐리티 로그인 페이지 이동.
+				.loginProcessingUrl("/memb/login/proc.do") //로그인 처리를 직접 해야됨.
 				//.failureUrl("/memb/login/error.do")
 				.usernameParameter("userid")
 				.passwordParameter("userpw")
