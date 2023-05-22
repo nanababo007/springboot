@@ -52,9 +52,9 @@ public class SecurityConfig {
 				.anyRequest().authenticated() //.authenticated() , .anonymous()
 			)
 			.formLogin(login -> login
-				.loginPage("/memb/login/form.do") //이 라인 주석시, 기본 시큐리티 로그인 페이지 이동.
-				.loginProcessingUrl("/memb/login/proc.do") //로그인 처리를 직접 해야됨.
-				//.failureUrl("/memb/login/error.do")
+				//.loginPage("/memb/login/form.do") //이 라인 주석시, 기본 시큐리티 로그인 페이지 이동.
+				//.loginProcessingUrl("/memb/login/proc.do") //로그인 처리를 직접 해야됨.
+				.failureUrl("/memb/login/error.do")
 				.usernameParameter("userid")
 				.passwordParameter("userpw")
 				//.defaultSuccessUrl("/main/index.do", true) //successHandler 메서드를 정의 안하면, 이 메서드를 주석 해제.
