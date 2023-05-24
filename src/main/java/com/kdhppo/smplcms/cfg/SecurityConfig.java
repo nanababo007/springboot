@@ -25,7 +25,7 @@ public class SecurityConfig {
 
 	/** 사이트 로그인 없이 접근 가능한 url. */
 	private static final String[] SITE_WHITE_LIST = {
-		"/css/**", "/js/**", "/images/**", "/memb/login/**", "/login"
+		"/css/**", "/js/**", "/images/**"
 	};
 
 	@Bean
@@ -53,7 +53,7 @@ public class SecurityConfig {
 			)
 			.formLogin(login -> login
 				//.loginPage("/memb/login/form.do") //이 라인 주석시, 기본 시큐리티 로그인 페이지 이동.
-				//.loginProcessingUrl("/memb/login/proc.do") //로그인 처리를 직접 해야됨.
+				//.loginProcessingUrl("/memb/login/proc.do") //로그인 폼에서 action 값을 이 값으로 변경.
 				.failureUrl("/memb/login/error.do")
 				.usernameParameter("userid")
 				.passwordParameter("userpw")

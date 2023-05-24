@@ -25,24 +25,4 @@ public class MembCtl {
 		return "memb/login/form";
 	}
 
-	/**
-	 * 로그인 처리 페이지.
-	 */
-	/*@PostMapping("/login/proc.do")
-	public String membLoginProc(User user) {
-		String userId = user.getUsername();
-		String userPw = user.getPassword();
-
-		Optional<MembResVo> menbInfoOpt = membSvc.getMembInfoById(userId, true);
-		MembResVo membInfo = menbInfoOpt.orElseThrow(() -> new UsernameNotFoundException(userId+" is not member."));
-
-		User.builder()
-			.username(membInfo.getMembId())
-			.password(membInfo.getMembPw())
-			.roles(AuthCst.ADMIN, AuthCst.USER)
-			.build();
-
-		return "redirect:/main/dash.do";
-	}*/
-
 }
