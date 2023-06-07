@@ -14,6 +14,7 @@
 - 디비 서버 : mysql
 - 디비 처리 : mybatis, jpa
 - 소스 헬퍼 : lombok
+- 배치 실행 : quartz
 
 # 문서
 - /smplcms/src/main/doc
