@@ -28,6 +28,8 @@ public class BtchSchdSmpl extends BtchSchdBase {
 	@PostConstruct
 	public void run(){
 		Map<String,Object> jdata = new HashMap<String,Object>();
+		//서비스 객체 등, 잡 클래스에서는 자동 주입을 못받으니, 여기서 받아서, 맵에다가 넘겨서,
+		//잡에서 맵을 읽어서, 해당 필요한 서비스 객체 등을 받아서 셋팅해서 사용하면 됨.
 		jdata.put("kkk", "bbb");
 		JobDetail detail = runJobDetail(BtchJobSmpl.class, jdata);
 
