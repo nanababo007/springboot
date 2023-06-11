@@ -1,4 +1,8 @@
 $(document).ready(function(){
+
+	//메뉴 렌더링
+	fnRenderMenu();
+
 	// gnb
 	$("nav > ul > li.has_sub > a").click(function(e){
 		if($(this).parent().has("> ul")) {
