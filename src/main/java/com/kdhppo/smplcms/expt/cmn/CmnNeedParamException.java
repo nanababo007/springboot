@@ -1,4 +1,4 @@
-package com.kdhppo.smplcms.expt.memb;
+package com.kdhppo.smplcms.expt.cmn;
 
 import com.kdhppo.smplcms.util.UtilClass;
 

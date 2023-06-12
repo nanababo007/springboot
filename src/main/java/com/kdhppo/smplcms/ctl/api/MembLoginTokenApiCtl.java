@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.kdhppo.smplcms.cmn.auth.JwtTokenProvider;
 import com.kdhppo.smplcms.cmn.auth.SiteAuthInfo;
-import com.kdhppo.smplcms.expt.memb.CmnNeedParamException;
+import com.kdhppo.smplcms.expt.cmn.CmnNeedParamException;
 import com.kdhppo.smplcms.expt.memb.MembLoginNotLoginException;
 import com.kdhppo.smplcms.expt.memb.MembLoginPwdNotMatchException;
 import com.kdhppo.smplcms.expt.memb.MembLoginTokenInvalidException;
