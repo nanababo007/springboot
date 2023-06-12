@@ -13,6 +13,8 @@ public class SiteAuthInfo {
 	private static final String cstLoginIdKeyName = "loginId";
 	/** 로그인한 회원 정보 저장, 키 이름 */
 	private static final String cstLoginInfoKeyName = "loginInfo";
+	/** 로그인한 회원 토큰, 키 이름 */
+	private static final String cstLoginTokenKeyName = "loginToken";
 
 	/**
 	 * 현재 로그인한 회원 아이디를 구함.
@@ -37,6 +39,20 @@ public class SiteAuthInfo {
 	 */
 	public static void setLoginUserInfo(HttpServletRequest request, MembResVo membInfo) {
 		request.getSession(true).setAttribute(cstLoginInfoKeyName, membInfo);
+	}
+
+	/**
+	 * 현재 로그인한 회원 토큰을 구함.
+	 */
+	public static String getLoginUserToken(HttpServletRequest request) {
+		return (String)request.getSession(true).getAttribute(cstLoginTokenKeyName);
+	}
+
+	/**
+	 * 현재 로그인한 회원 토큰을 설정.
+	 */
+	public static void setLoginUserToken(HttpServletRequest request, String token) {
+		request.getSession(true).setAttribute(cstLoginTokenKeyName, token);
 	}
 
 }

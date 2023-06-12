@@ -17,14 +17,18 @@ import com.kdhppo.smplcms.vo.memb.MembResVo;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * 사이트 로그인 후에, 성공 실패 시 처리 메서드 정의.
  */
+@Slf4j
 @Component
 public class SiteAuthAfterProc implements AuthenticationSuccessHandler, AuthenticationFailureHandler {
-    @Autowired
+	@Autowired
 	private MembSvc membSvc;
+	@Autowired
+	private JwtTokenProvider tokenProvider;
 
 	/**
 	 * 로그인 성공 시 처리.
@@ -40,6 +44,13 @@ public class SiteAuthAfterProc implements AuthenticationSuccessHandler, Authenti
 
 			//로그인한 회원 정보 세션 저장.
 			SiteAuthInfo.setLoginUserInfo(request, membInfo);
+
+			//토큰 발급 및 저장
+			String token = tokenProvider.createToken(userId);
+			log.info("login user token created : "+token);
+
+			//로그인한 회원 토큰 세션 저장.
+			SiteAuthInfo.setLoginUserToken(request, token);
 
 			//메인 페이지로 이동 처리.
 			response.sendRedirect("/main/index.do");
