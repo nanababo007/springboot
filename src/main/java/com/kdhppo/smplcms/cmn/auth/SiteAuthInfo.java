@@ -17,6 +17,17 @@ public class SiteAuthInfo {
 	private static final String cstLoginTokenKeyName = "loginToken";
 
 	/**
+	 * 현재 로그인 여부 반환.
+	 */
+	public static boolean isLogin(HttpServletRequest request) {
+		if(UtilClass.isEmpty(getLoginUserId(request))){
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	/**
 	 * 현재 로그인한 회원 아이디를 구함.
 	 */
 	public static String getLoginUserId(HttpServletRequest request) {

@@ -25,7 +25,8 @@ public class SecurityConfig {
 
 	/** 사이트 로그인 없이 접근 가능한 url. */
 	private static final String[] SITE_WHITE_LIST = {
-		"/css/**", "/js/**", "/images/**"
+		"/css/**", "/js/**", "/images/**",
+		"/api/memb/login/token/*"
 	};
 
 	@Bean

@@ -503,6 +503,44 @@ public class UtilClass {
 		return !isEmpty(v_val);
 	}
 
+	/**
+	 * @param v_vals 빈값 체크할 값 한개 이상
+	 * @return 여러 변수들이 모두 값이 있으면 false, 하나라도 값이 비어 있으면 true
+	 */
+	public static <T1> boolean isEmptiesOneMore(T1[] v_vals){
+		boolean result = false;
+
+		if(v_vals!=null) {
+			for (T1 v_val : v_vals) {
+				if(isEmpty(v_val)) {
+					result = true;
+					break;
+				}
+			}
+		}
+
+		return result;
+	}
+
+	/**
+	 * @param v_vals 빈값 체크할 값 한개 이상
+	 * @return 여러 변수들이 모두 값이 비어 있으면 true, 하나라도 값이 있으면 false
+	 */
+	public static <T1> boolean isEmptiesAll(T1[] v_vals){
+		boolean result = true;
+
+		if(v_vals!=null) {
+			for (T1 v_val : v_vals) {
+				if(isNotEmpty(v_val)) {
+					result = false;
+					break;
+				}
+			}
+		}
+
+		return result;
+	}
+
 	public static String wrap(String p_prefix, String p_cont, String p_suffix){
 		String result = p_cont;
 

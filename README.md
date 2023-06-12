@@ -19,9 +19,15 @@
 # 문서
 - /smplcms/src/main/doc
 
-# 주요 경로
+# 페이지 주요 경로
 - 로그인 페이지 : /login
 - 로그아웃 페이지 : /logout
 - 메인 대시보드 페이지 : /main/dash.do
 - 샘플 목록 페이지 : /sample/post/list.do
 - 샘플 쓰기 페이지 : /sample/post/write.do
+
+# API 주요 경로
+- 토큰 신규 발급 : /api/memb/login/token/new.do
+- 토큰 재발급 : /api/memb/login/token/renew.do
+- 토큰 확인 : /api/memb/login/token/valid.do
+- 로그인 토큰 정보 : /api/memb/login/token/login.do
