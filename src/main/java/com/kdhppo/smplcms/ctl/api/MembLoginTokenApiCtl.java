@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.kdhppo.smplcms.cmn.auth.JwtTokenProvider;
 import com.kdhppo.smplcms.cmn.auth.SiteAuthInfo;
+import com.kdhppo.smplcms.expt.memb.CmnNeedParamException;
 import com.kdhppo.smplcms.expt.memb.MembLoginNotLoginException;
 import com.kdhppo.smplcms.expt.memb.MembLoginPwdNotMatchException;
 import com.kdhppo.smplcms.expt.memb.MembLoginTokenInvalidException;
@@ -56,7 +57,7 @@ public class MembLoginTokenApiCtl {
 		try {
 			//유효성 체크
 			if(UtilClass.isEmptiesOneMore(new String[]{userId,userPw})) {
-				return ResUtilClass.getCmnErrRes("need_param", log, data);
+				throw new CmnNeedParamException("need_param","userId,userPw");
 			}
 
 			//로그인한 회원 정보 구하기.
@@ -76,6 +77,8 @@ public class MembLoginTokenApiCtl {
 			data.put("userId", userId);
 			data.put("token", token);
 
+		} catch (CmnNeedParamException e) {
+			return ResUtilClass.getCmnErrRes("need_param", log, data, e);
 		} catch (UsernameNotFoundException e) {
 			return ResUtilClass.getCmnErrRes("not_member", log, data, e);
 		} catch (MembLoginPwdNotMatchException e) {
@@ -99,9 +102,9 @@ public class MembLoginTokenApiCtl {
 			//기존 발행 토큰.
 			String token = membLoginReqVo.getToken();
 
-			//유효성 체크
+			//파라미터 체크
 			if(UtilClass.isEmptiesOneMore(new String[]{token})) {
-				return ResUtilClass.getCmnErrRes("need_param", log, data);
+				throw new CmnNeedParamException("need_param","token");
 			}
 
 			//기존 발행 토큰.
@@ -122,6 +125,8 @@ public class MembLoginTokenApiCtl {
 			//기존 발행 토큰.
 			data.put("newToken",newToken);
 
+		} catch (CmnNeedParamException e) {
+			return ResUtilClass.getCmnErrRes("need_param", log, data, e);
 		} catch (MembLoginTokenInvalidException e) {
 			return ResUtilClass.getCmnErrRes("token_invalid", log, data, e);
 		}
@@ -144,7 +149,7 @@ public class MembLoginTokenApiCtl {
 
 			//유효성 체크
 			if(UtilClass.isEmptiesOneMore(new String[]{token})) {
-				return ResUtilClass.getCmnErrRes("need_param", log, data);
+				throw new CmnNeedParamException("need_param","token");
 			}
 
 			//기존 발행 토큰 출력 설정.
@@ -168,6 +173,8 @@ public class MembLoginTokenApiCtl {
 			data.put("expiresAt",expDtStr);
 			data.put("expRemainSec",expRemainSec);
 
+		} catch (CmnNeedParamException e) {
+			return ResUtilClass.getCmnErrRes("need_param", log, data, e);
 		} catch (MembLoginTokenInvalidException e) {
 			return ResUtilClass.getCmnErrRes("token_invalid", log, data, e);
 		}
