@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS `tb_memb_info` (
 
 -- 테이블 데이터 smplcms.tb_memb_info:~1 rows (대략적) 내보내기
 REPLACE INTO `tb_memb_info` (`memb_id`, `memb_nm`, `memb_pw`, `admin_yn`, `del_yn`, `use_yn`, `join_dt`, `regdate`, `reguser`, `moddate`, `moduser`) VALUES
-	('admin', '관리자', '19990326', 'ㅛ', 'N', 'Y', '20230607', '2023-06-07 13:12:29', 'admin', '2023-06-07 13:12:30', 'admin');
+	('admin', '관리자', '1234', 'ㅛ', 'N', 'Y', '20230607', '2023-06-07 13:12:29', 'admin', '2023-06-07 13:12:30', 'admin');
 
 
 
