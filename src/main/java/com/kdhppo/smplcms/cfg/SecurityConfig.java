@@ -56,8 +56,8 @@ public class SecurityConfig {
 				//.loginPage("/memb/login/form.do") //이 라인 주석시, 기본 시큐리티 로그인 페이지 이동.
 				//.loginProcessingUrl("/memb/login/proc.do") //로그인 폼에서 action 값을 이 값으로 변경.
 				.failureUrl("/memb/login/error.do")
-				.usernameParameter("userid")
-				.passwordParameter("userpw")
+				.usernameParameter("userId")
+				.passwordParameter("userPw")
 				//.defaultSuccessUrl("/main/index.do", true) //successHandler 메서드를 정의 안하면, 이 메서드를 주석 해제.
 				.successHandler(siteAuthAfterProc) //로그인 성공시 처리. 이 메서드를 정의하면, 위의 defaultSuccessUrl 가 동작 안함.
 				//.failureHandler(siteAuthAfterProc) //로그인 실패시 처리. 메서드 정의 하면, 기본 로그인 실패 동작 안함, 직접 구현해 줘야됨.

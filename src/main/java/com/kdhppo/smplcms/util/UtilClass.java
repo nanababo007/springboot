@@ -244,6 +244,18 @@ public class UtilClass {
     	java.text.SimpleDateFormat simpleDateFormat = new java.text.SimpleDateFormat(format);
         return simpleDateFormat.format(new Date());
     }
+	// format : yyyyMMddHHmmss
+    public static String getForamtDate(String format, Date p_date) {
+    	java.text.SimpleDateFormat simpleDateFormat = new java.text.SimpleDateFormat(format);
+        return simpleDateFormat.format(p_date);
+    }
+	// format : yyyyMMddHHmmss
+    // 두 시간 차이를 초 단위로 반환
+    public static long getDateDiffSec(Date dt1, Date dt2) {
+    	long termMsec = dt2.getTime() - dt1.getTime();
+    	long termSec = termMsec / 1000L;
+        return termSec;
+    }
 
     //getWeekDay("2011-11-11", "yyyy-MM-dd")
     //getWeekDay("20111111", "yyyyMMdd")

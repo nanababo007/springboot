@@ -1,5 +1,6 @@
 package com.kdhppo.smplcms.ctl.api;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.auth0.jwt.interfaces.DecodedJWT;
 import com.kdhppo.smplcms.cmn.auth.JwtTokenProvider;
 import com.kdhppo.smplcms.cmn.auth.SiteAuthInfo;
 import com.kdhppo.smplcms.expt.memb.MembLoginNotLoginException;
@@ -93,8 +95,36 @@ public class MembLoginTokenApiCtl {
 	public ResponseEntity<Map<String,Object>> tokenRenew(HttpServletRequest request, MembLoginReqVo membLoginReqVo) {
 		Map<String,Object> data = new HashMap<String,Object>();
 
-		//기존에 발행했던, 기간만료 등이 안된, 아직 유효한 토큰.
-		String token = membLoginReqVo.getToken();
+		try {
+			//기존 발행 토큰.
+			String token = membLoginReqVo.getToken();
+
+			//유효성 체크
+			if(UtilClass.isEmptiesOneMore(new String[]{token})) {
+				return ResUtilClass.getCmnErrRes("need_param", log, data);
+			}
+
+			//기존 발행 토큰.
+			data.put("oldToken",token);
+
+			//토큰 유효성 체크
+			if(tokenProvider.checkValidToken(token)==null) {
+				throw new MembLoginTokenInvalidException("current user's token is not valid");
+			}
+
+			//기존 토큰에 저장된 회원 아이디 추출.
+			String userId = tokenProvider.getSubjectFromToken(token);
+
+			//토큰 재발급.
+			String newToken = tokenProvider.createToken(userId);
+			log.info("login user token created : "+newToken);
+
+			//기존 발행 토큰.
+			data.put("newToken",newToken);
+
+		} catch (MembLoginTokenInvalidException e) {
+			return ResUtilClass.getCmnErrRes("token_invalid", log, data, e);
+		}
 
 		return ResponseEntity.status(HttpStatus.OK).body(data);
 	}
@@ -108,8 +138,39 @@ public class MembLoginTokenApiCtl {
 	public ResponseEntity<Map<String,Object>> tokenValid(HttpServletRequest request, MembLoginReqVo membLoginReqVo) {
 		Map<String,Object> data = new HashMap<String,Object>();
 
-		//기존에 발행했던, 기간만료 등이 안된, 아직 유효한 토큰.
-		String token = membLoginReqVo.getToken();
+		try {
+			//기존 발행 토큰.
+			String token = membLoginReqVo.getToken();
+
+			//유효성 체크
+			if(UtilClass.isEmptiesOneMore(new String[]{token})) {
+				return ResUtilClass.getCmnErrRes("need_param", log, data);
+			}
+
+			//기존 발행 토큰 출력 설정.
+			data.put("token",token);
+
+			//토큰 유효성 체크
+			if(tokenProvider.checkValidToken(token)==null) {
+				throw new MembLoginTokenInvalidException("current user's token is not valid");
+			}
+
+			//기존 토큰에 저장된 회원 아이디 추출.
+			DecodedJWT djwt = tokenProvider.getDecodedToken(token);
+			//만료 일시
+			Date expDt = djwt.getExpiresAt();
+			//만료 일시 문자열
+			String expDtStr = UtilClass.getForamtDate("yyyy-MM-dd HH:mm:ss", expDt);
+			//만료 남은 시간 (초)
+			long expRemainSec = UtilClass.getDateDiffSec(expDt, new Date());
+
+			//기존 발행 토큰.
+			data.put("expiresAt",expDtStr);
+			data.put("expRemainSec",expRemainSec);
+
+		} catch (MembLoginTokenInvalidException e) {
+			return ResUtilClass.getCmnErrRes("token_invalid", log, data, e);
+		}
 
 		return ResponseEntity.status(HttpStatus.OK).body(data);
 	}
@@ -124,7 +185,6 @@ public class MembLoginTokenApiCtl {
 		Map<String,Object> data = new HashMap<String,Object>();
 
 		try {
-			log.info("SiteAuthInfo.id :: "+SiteAuthInfo.getLoginUserId(request));
 			//로그인 안되어 있으면 오류
 			if(!SiteAuthInfo.isLogin(request)) {
 				throw new MembLoginNotLoginException("not login now");
