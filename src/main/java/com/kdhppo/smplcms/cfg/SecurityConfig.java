@@ -9,7 +9,10 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import com.kdhppo.smplcms.cmn.auth.JwtAuthFilter;
+import com.kdhppo.smplcms.cmn.auth.JwtTokenProvider;
 import com.kdhppo.smplcms.cmn.auth.SiteAuthAfterProc;
 import com.kdhppo.smplcms.cmn.auth.SitePasswordEncoder;
 import com.kdhppo.smplcms.cst.AuthCst;
@@ -22,6 +25,8 @@ public class SecurityConfig {
 
 	@Autowired
 	SiteAuthAfterProc siteAuthAfterProc;
+	@Autowired
+	JwtTokenProvider jwtTokenProvider;
 
 	/** 사이트 로그인 없이 접근 가능한 url. */
 	private static final String[] SITE_WHITE_LIST = {
@@ -42,14 +47,14 @@ public class SecurityConfig {
 
 		//스프링 시큐리티 설정.
 		http
-			.csrf().disable().cors().disable()
+			.csrf().disable()
+			.cors().disable()
+			//.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 			.authorizeHttpRequests(request -> request
 				//.shouldFilterAllDispatcherTypes(false)
 				.dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
-				//.requestMatchers("/css/**", "/js/**", "/images/**", "/memb/**", "/").permitAll()
 				.requestMatchers(SITE_WHITE_LIST).permitAll()
 				.requestMatchers("/**").hasRole(AuthCst.ADMIN)
-				//.requestMatchers("/mypage/**").hasRole(AuthCst.USER)
 				.anyRequest().authenticated() //.authenticated() , .anonymous()
 			)
 			.formLogin(login -> login
@@ -70,10 +75,14 @@ public class SecurityConfig {
 
 		//세션을 쓰지 않음.
 		//http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-		//JWT 필터 체크 등, 사이트 시큐리티 인증관련 필터 등록.
-		//http.addFilterBefore(filter, SiteAuthFilter.class);
 
-		//http.headers().frameOptions().disable();
+		http.headers().frameOptions().disable();
+
+		//JWT 필터 체크 등, 사이트 시큐리티 인증관련 필터 등록.
+		http.addFilterBefore(
+			new JwtAuthFilter(jwtTokenProvider),
+			UsernamePasswordAuthenticationFilter.class
+		);
 
 		return http.build();
     }
