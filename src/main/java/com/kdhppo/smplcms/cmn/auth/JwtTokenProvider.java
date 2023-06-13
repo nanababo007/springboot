@@ -121,9 +121,9 @@ public class JwtTokenProvider {
 
 		//정상적으로 복호화 되었으면
 		if(djwt!=null) {
-			// security 권한 목록
+			// security 권한 목록, ROLE_ 권한앞에 붙여줘야됨, 안붙이면 api 호출시 403 에러남.
 			Collection<GrantedAuthority> authorities =
-				Arrays.stream(new String[] {AuthCst.ADMIN, AuthCst.USER}).
+				Arrays.stream(new String[] {AuthCst.ROLE_ADMIN, AuthCst.ROLE_USER}).
 				map(SimpleGrantedAuthority::new).collect(Collectors.toList());
 
 			// UserDetails 객체를 만들어서 Authentication 리턴
