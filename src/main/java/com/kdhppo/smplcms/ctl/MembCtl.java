@@ -7,8 +7,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.kdhppo.smplcms.svc.MembSvc;
-
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -16,8 +14,6 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/memb")
 public class MembCtl {
 	private final Logger logger = LoggerFactory.getLogger(MembCtl.class);
-
-	private final MembSvc membSvc;
 
 	//로그인 페이지.
 	@GetMapping("/login/form.do")

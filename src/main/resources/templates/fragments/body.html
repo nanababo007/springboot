@@ -42,6 +42,14 @@
         <footer>footer...</footer>
     </div>
 
+	<th:block layout:fragment="scriptBefore">
+		<script th:inline="javascript">
+		/*<![CDATA[*/
+			var loginToken = /*[[${loginToken}]]*/ '';
+		/*]]>*/
+		</script>
+	</th:block>
+
     <script th:src="@{/js/function.js}"></script>
     <script th:src="@{/js/jquery-3.6.0.min.js}"></script>
     <script th:src="@{/js/menu.js}"></script>

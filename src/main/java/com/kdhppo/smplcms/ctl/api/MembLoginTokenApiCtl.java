@@ -15,9 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.kdhppo.smplcms.cmn.auth.JwtTokenProvider;
-import com.kdhppo.smplcms.cmn.auth.SiteAuthInfo;
 import com.kdhppo.smplcms.expt.cmn.CmnNeedParamException;
-import com.kdhppo.smplcms.expt.memb.MembLoginNotLoginException;
 import com.kdhppo.smplcms.expt.memb.MembLoginPwdNotMatchException;
 import com.kdhppo.smplcms.expt.memb.MembLoginTokenInvalidException;
 import com.kdhppo.smplcms.svc.MembSvc;
@@ -177,41 +175,6 @@ public class MembLoginTokenApiCtl {
 			return ResUtilClass.getCmnErrRes("need_param", log, data, e);
 		} catch (MembLoginTokenInvalidException e) {
 			return ResUtilClass.getCmnErrRes("token_invalid", log, data, e);
-		}
-
-		return ResponseEntity.status(HttpStatus.OK).body(data);
-	}
-
-	/**
-	 * 현재 로그인한 토큰 정보
-	 * 폼 로그인 시, 발급한 세션에 저장된 토큰 정보를 반환
-	 * @return 폼 로그인 시 발행한 토큰 정보
-	 */
-	@PostMapping("/login.do")
-	public ResponseEntity<Map<String,Object>> tokenLogin(HttpServletRequest request) {
-		Map<String,Object> data = new HashMap<String,Object>();
-
-		try {
-			//로그인 안되어 있으면 오류
-			if(!SiteAuthInfo.isLogin(request)) {
-				throw new MembLoginNotLoginException("not login now");
-			}
-
-			//로그인 토큰 값
-			String token = SiteAuthInfo.getLoginUserToken(request);
-
-			//토큰 유효성 체크
-			if(tokenProvider.checkValidToken(token)==null) {
-				throw new MembLoginTokenInvalidException("current user's token is not valid");
-			}
-
-			//현재 로그인 토큰값 출력 결과 설정
-			data.put("token",token);
-
-		} catch (MembLoginTokenInvalidException e) {
-			return ResUtilClass.getCmnErrRes("token_invalid", log, data, e);
-		} catch (MembLoginNotLoginException e) {
-			return ResUtilClass.getCmnErrRes("not_login", log, data, e);
 		}
 
 		return ResponseEntity.status(HttpStatus.OK).body(data);

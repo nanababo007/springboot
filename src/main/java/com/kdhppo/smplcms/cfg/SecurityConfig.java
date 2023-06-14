@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -73,8 +74,9 @@ public class SecurityConfig {
 			//.logoutRequestMatcher(new AntPathRequestMatcher("/memb/login/logout.do"))
 			//.logoutSuccessUrl("/");
 
-		//세션을 쓰지 않음.
+		//세션 설정.
 		//http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.ALWAYS);
 
 		http.headers().frameOptions().disable();
 
