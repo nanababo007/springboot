@@ -2,8 +2,6 @@ package com.kdhppo.smplcms.ctl;
 
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,12 +13,12 @@ import com.kdhppo.smplcms.vo.sample.PostReqVo;
 import com.kdhppo.smplcms.vo.sample.PostResVo;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Controller
 @RequiredArgsConstructor
 public class PostCtl {
-	private final Logger logger = LoggerFactory.getLogger(PostCtl.class);
-
     private final PostSvc postSvc;
 
     // 게시글 리스트 페이지
