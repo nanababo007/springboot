@@ -5,11 +5,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.kdhppo.smplcms.ctl.api.SmplApiCtl;
+
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Controller
-public class MainCtl {
+@RequestMapping("/page")
+public class PageCtl {
 
 	//메인 대시보드 페이지.
-	@GetMapping({"/", "/main/index.do", "/main/dash.do"})
+	@GetMapping("/")
 	public String index(Model model) {
 		return "main/index";
 	}
