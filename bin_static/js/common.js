@@ -2,6 +2,12 @@ $(document).ready(function(){
 
 	//메뉴 렌더링
 	fnRenderMenu();
+	//현재 메뉴 설정
+	fnSetCurMenu();
+	//현재 메뉴 활성화
+	fnActiveMenu();
+	//메뉴 네비게이션 설정
+	fnSetMenuNavi();
 
 	// gnb
 	$("nav > ul > li.has_sub > a").click(function(e){

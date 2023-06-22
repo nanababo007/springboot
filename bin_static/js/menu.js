@@ -11,27 +11,30 @@ var menuList = {
 		{
 			id:'main'
 			,title:'대시보드'
+			,pageTitle:'메인 페이지'
 			,topYn:'Y'
 			,dispYn:'Y'
-			,url:'/main/dash'
+			,url:'/main/dash.do'
 			,urlTarget:'_self'
 		}
 		//회원 관리
 		,{
 			id:'memb'
 			,title:'회원관리'
+			,pageTitle:''
 			,topYn:'Y'
 			,dispYn:'Y'
-			,url:'/memb/list'
+			,url:''
 			,urlTarget:'_self'
 			,subList:[
 				//회원 목록
 				{
 					id:'membList'
 					,title:'회원목록'
+					,pageTitle:'회원 리스트 관리'
 					,topYn:'Y'
 					,dispYn:'Y'
-					,url:'/memb/list'
+					,url:'/memb/list.do'
 					,urlTarget:'_self'
 				}
 			]
@@ -51,7 +54,7 @@ var menuList = {
 					,title:'페이지등록'
 					,topYn:'Y'
 					,dispYn:'Y'
-					,url:''
+					,url:'/page/reg.do'
 					,urlTarget:'_self'
 				}
 			]
@@ -62,7 +65,7 @@ var menuList = {
 			,title:'게시판관리'
 			,topYn:'Y'
 			,dispYn:'Y'
-			,url:'/bord'
+			,url:''
 			,urlTarget:'_self'
 			,subList:[
 				//공지사항
@@ -71,7 +74,7 @@ var menuList = {
 					,title:'공지사항'
 					,topYn:'Y'
 					,dispYn:'Y'
-					,url:'/bord/noti'
+					,url:'/bord/noti.do'
 					,urlTarget:'_self'
 				}
 				//FAQ
@@ -80,7 +83,7 @@ var menuList = {
 					,title:'FAQ'
 					,topYn:'Y'
 					,dispYn:'Y'
-					,url:'/bord/faq'
+					,url:'/bord/faq.do'
 					,urlTarget:'_self'
 				}
 				//QnA
@@ -89,7 +92,7 @@ var menuList = {
 					,title:'QnA'
 					,topYn:'Y'
 					,dispYn:'Y'
-					,url:'/bord/qna'
+					,url:'/bord/qna.do'
 					,urlTarget:'_self'
 				}
 				//제품소개
@@ -98,13 +101,16 @@ var menuList = {
 					,title:'제품소개'
 					,topYn:'Y'
 					,dispYn:'Y'
-					,url:''
+					,url:'/bord/img.do'
 					,urlTarget:'_self'
 				}
 			]
 		}
 	]
 };
+//현재 메뉴 정보
+var curMenu1Info = null; //depth1
+var curMenu2Info = null; //depth2
 //메뉴 렌더링
 function fnRenderMenu(){
 	var menuContainer = $('#container div.lcontent > nav > ul');
@@ -141,4 +147,16 @@ function fnRenderMenu(){
 			});
 		}
 	});
+}
+//현재 메뉴 설정
+function fnSetCurMenu(){
+
+}
+//메뉴 네비게이션 설정
+function fnSetMenuNavi(){
+
+}
+//현재 메뉴 활성화
+function fnActiveMenu(){
+
 }
