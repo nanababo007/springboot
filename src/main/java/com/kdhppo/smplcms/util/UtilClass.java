@@ -976,4 +976,84 @@ public class UtilClass {
 		}
 	}
 
+	/**
+	 * 함수선언영역
+	 * String 배열과 구분자 문자열(div)를 파라미터로 넘깁니다.
+	 */
+	public static String joinString(String[] arrStr, String div){
+		StringBuffer sb = new StringBuffer();
+		String result = "";
+
+		if(arrStr!=null){
+			div = div==null ? "" : div;
+
+			for(int i=0;i<arrStr.length;i++){
+				sb.append(div);
+				sb.append(arrStr[i]);
+			}
+		}
+
+		result = sb.toString();
+
+		if(result.startsWith(div)){
+		result = result.substring(div.length());
+		}
+
+		return result;
+	}
+
+	/**
+	 * 문자열 배열 항목중에 빈값이 있으면, 이 부분은 제외시키고,
+	 * 문자열을 병합합니다.
+	 * 문약 출력하실 문자열이 여러 항목들을 출력하실때
+	 *  A / B / C 이런식으로 출력하시기를 원하시면,
+	 *  중간에 빈값이 있거나 그럴경우, A / / C 이런식으로
+	 *  빈 공백사이에 구분자가 있어서 보기가 그럴 경우가 있습니다.
+	 *  이럴때 항목중에 빈항목이 있으면 건너뛰어서,
+	 *  A / C 이런식으로 깔끔하게 출력하게 됩니다.
+	 */
+	public static String joinStringExceptEmpty(String[] arrStr, String div){
+		StringBuffer sb = new StringBuffer();
+		String result = "";
+
+		if(arrStr!=null){
+			div = div==null ? "" : div;
+
+			for(int i=0;i<arrStr.length;i++){
+				if(!arrStr[i].trim().equals("")){
+					sb.append(div);
+					sb.append(arrStr[i]);
+				}
+			}
+		}
+
+		result = sb.toString();
+
+		if(result.startsWith(div)){
+			result = result.substring(div.length());
+		}
+
+		return result;
+	}
+
+	/**
+	 * 원본 문자열에서, 대상 문자열을 단순 전체 치환 처리
+	 * @param str : 원본 문자열
+	 * @param target : 대상 문자열
+	 * @param rep : 치환 문자열
+	 * @return : 원본 문자열에서, 대상 문자열을 단순 전체 치환된 문자열
+	 */
+	public static String replaceAll(String str, String target, String rep){
+		str = nvl(str);
+		target = nvl(target);
+		rep = nvl(rep);
+
+		if(isNotEmpty(str) && isNotEmpty(target)) {
+			String[] arr = str.split(target);
+			str = joinString(arr,rep);
+		}
+
+		return str;
+	}
+
 }
