@@ -21,7 +21,7 @@ var menuList = {
 		,{
 			id:'memb'
 			,title:'회원관리'
-			,pageTitle:''
+			,pageTitle:'회원 관리'
 			,topYn:'Y'
 			,dispYn:'Y'
 			,url:''
@@ -43,7 +43,7 @@ var menuList = {
 		,{
 			id:'page'
 			,title:'페이지관리'
-			,pageTitle:''
+			,pageTitle:'페이지 관리'
 			,topYn:'Y'
 			,dispYn:'Y'
 			,url:''
@@ -65,7 +65,7 @@ var menuList = {
 		,{
 			id:'bord'
 			,title:'게시판관리'
-			,pageTitle:''
+			,pageTitle:'게시판 관리'
 			,topYn:'Y'
 			,dispYn:'Y'
 			,url:''
@@ -218,7 +218,15 @@ function fnSetCurMenu(){
 }
 //메뉴 네비게이션 설정
 function fnSetMenuNavi(){
-
+	var html = [];
+	var path = $('#container .rcontent .page_tits .path');
+	if(curMenu1Info!=null){
+		html.push(' <span>'+curMenu1Info.pageTitle+'</span> ');
+	}
+	if(curMenu2Info!=null){
+		html.push(' <span>'+curMenu2Info.pageTitle+'</span> ');
+	}
+	path.append(html);
 }
 //활성 메뉴 히스토리 정보 가져오기
 //fnGetActiveMenuHist('last') : 마지막 최근 항목
