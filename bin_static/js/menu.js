@@ -219,12 +219,15 @@ function fnSetCurMenu(){
 //메뉴 네비게이션 설정
 function fnSetMenuNavi(){
 	var html = [];
+	var title = $('#container .rcontent .page_tits h3');
 	var path = $('#container .rcontent .page_tits .path');
 	if(curMenu1Info!=null){
 		html.push(' <span>'+curMenu1Info.pageTitle+'</span> ');
+		title.text(curMenu1Info.pageTitle);
 	}
 	if(curMenu2Info!=null){
 		html.push(' <span>'+curMenu2Info.pageTitle+'</span> ');
+		title.text(curMenu2Info.pageTitle);
 	}
 	path.append(html);
 }

@@ -5,8 +5,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.kdhppo.smplcms.ctl.api.SmplApiCtl;
-
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -14,10 +12,16 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/page")
 public class PageCtl {
 
-	//메인 대시보드 페이지.
-	@GetMapping("/")
-	public String index(Model model) {
-		return "main/index";
+	//페이지 목록.
+	@GetMapping("/list.do")
+	public String list(Model model) {
+		return "page/list";
+	}
+
+	//페이지 등록.
+	@GetMapping("/reg.do")
+	public String reg(Model model) {
+		return "page/reg";
 	}
 
 }
