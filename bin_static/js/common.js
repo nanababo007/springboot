@@ -1,11 +1,9 @@
 $(document).ready(function(){
 
-	//메뉴 렌더링
-	fnRenderMenu();
 	//현재 메뉴 설정
 	fnSetCurMenu();
-	//현재 메뉴 활성화
-	fnActiveMenu();
+	//메뉴 렌더링
+	fnRenderMenu();
 	//메뉴 네비게이션 설정
 	fnSetMenuNavi();
 
@@ -61,6 +59,7 @@ $(document).ready(function(){
 		var tmppath = URL.createObjectURL(event.target.files[0]);
 		$(this).parent('label').parent('.file_upload').parent('.file_preview').find("img").attr('src',tmppath);
 	});
+
 });
 
 // 레이어 팝업(기본)

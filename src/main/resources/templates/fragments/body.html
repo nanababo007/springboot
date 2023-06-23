@@ -47,16 +47,22 @@
         <footer>footer...</footer>
     </div>
 
+    <script th:src="@{/js/function.js}"></script>
+    <script th:src="@{/js/jquery-3.6.0.min.js}"></script>
+
 	<th:block layout:fragment="scriptBefore">
 		<script th:inline="javascript">
 		/*<![CDATA[*/
+			//로그인 토큰
 			var loginToken = /*[[${loginToken}]]*/ '';
+			//현재 브라우져 경로값 (/memb/list.do)
+			var curUrlPathname = fnGetCurUrl('pathname');
+			//메뉴조회 이력정보 저장 키값
+			var cstActiveMenuHistSaveKey = 'activeMenuHistKey';
 		/*]]>*/
 		</script>
 	</th:block>
 
-    <script th:src="@{/js/function.js}"></script>
-    <script th:src="@{/js/jquery-3.6.0.min.js}"></script>
     <script th:src="@{/js/menu.js}"></script>
     <script th:src="@{/js/common.js}"></script>
     <script src="https://kit.fontawesome.com/79613ae794.js" crossorigin="anonymous"></script>
