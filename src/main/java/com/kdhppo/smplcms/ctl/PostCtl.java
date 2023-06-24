@@ -19,6 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @RequiredArgsConstructor
 public class PostCtl {
+
     private final PostSvc postSvc;
 
     // 게시글 리스트 페이지

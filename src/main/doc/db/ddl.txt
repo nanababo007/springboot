@@ -28,6 +28,7 @@ CREATE TABLE IF NOT EXISTS `tb_memb_info` (
   `del_yn` varchar(1) DEFAULT 'N' COMMENT '삭제 여부',
   `use_yn` varchar(1) DEFAULT 'Y' COMMENT '사용 여부',
   `join_dt` varchar(8) DEFAULT NULL COMMENT '가입일자(YYYYMMDD)',
+  `out_dttm` datetime DEFAULT NULL COMMENT '탈퇴일시',
   `regdate` datetime DEFAULT NULL COMMENT '등록일시',
   `reguser` varchar(50) DEFAULT NULL COMMENT '등록자',
   `moddate` datetime DEFAULT NULL COMMENT '수정일시',

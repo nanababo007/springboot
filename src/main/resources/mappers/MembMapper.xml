@@ -11,11 +11,12 @@
 			,a.admin_yn
 			,a.use_yn
 			,a.join_dt
-			,a.regdate
-			,ifnull(date_format(a.regdate,'%y-%m-%d'),'') as regdate_str
+			,ifnull(date_format(a.out_dttm,'%Y-%m-%d %H:%i:%S'),'') as out_dttm
+			,ifnull(date_format(a.regdate,'%Y-%m-%d'),'') as regdate
+			,ifnull(date_format(a.regdate,'%Y-%m-%d %H:%i:%S'),'') as regdate_str
 			,a.reguser
-			,a.moddate
-			,ifnull(date_format(a.moddate,'%y-%m-%d'),'') as moddate_str
+			,ifnull(date_format(a.moddate,'%Y-%m-%d'),'') as moddate
+			,ifnull(date_format(a.moddate,'%Y-%m-%d %H:%i:%S'),'') as moddate_str
 			,a.moduser
 		from
 			tb_memb_info a
@@ -38,12 +39,13 @@
 			,admin_yn
 			,use_yn
 			,join_dt
-			,regdate
+			,ifnull(date_format(a.out_dttm,'%Y-%m-%d %H:%i:%S'),'') as out_dttm
+			,ifnull(date_format(a.regdate,'%Y-%m-%d'),'') as regdate
 			,reguser
-			,moddate
+			,ifnull(date_format(a.moddate,'%Y-%m-%d'),'') as moddate
 			,moduser
-			,ifnull(date_format(a.regdate,'%y-%m-%d'),'') as regdate_str
-			,ifnull(date_format(a.moddate,'%y-%m-%d'),'') as moddate_str
+			,ifnull(date_format(a.regdate,'%Y-%m-%d %H:%i:%S'),'') as regdate_str
+			,ifnull(date_format(a.moddate,'%Y-%m-%d %H:%i:%S'),'') as moddate_str
 		from
 			tb_memb_info a
 		where
@@ -74,6 +76,7 @@
 			,del_yn
 			,use_yn
 			,join_dt
+			,out_dttm
 			,regdate
 			,reguser
 			,moddate
@@ -86,6 +89,7 @@
 			,ifnull(#{delYn},'Y')
 			,ifnull(#{useYn},'N')
 			,#{joinDt}
+			,#{outDttm}
 			,now()
 			,#{userId}
 			,now()
@@ -113,6 +117,9 @@
 		update tb_memb_info
 		set
 			del_yn='Y'
+			,out_dttm=now()
+			,moddate=now()
+			,moduser=#{userId}
 		where
 			memb_id=#{membId}
 	</update>

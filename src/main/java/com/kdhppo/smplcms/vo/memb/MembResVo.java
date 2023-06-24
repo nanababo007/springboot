@@ -13,8 +13,11 @@ public class MembResVo {
 	private String delYn;
 	private String useYn;
 	private String joinDt;
+	private String outDttm;
+	private String regdate;
 	private String regdateStr;
 	private String reguser;
+	private String moddate;
 	private String moddateStr;
 	private String moduser;
 }

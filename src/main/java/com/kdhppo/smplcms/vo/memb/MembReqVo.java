@@ -21,6 +21,7 @@ public class MembReqVo extends SearchVo {
 	private String delYn;
 	private String useYn;
 	private String joinDt;
+	private String outDttm;
 	private String regdateStr;
 	private String reguser;
 	private String moddateStr;

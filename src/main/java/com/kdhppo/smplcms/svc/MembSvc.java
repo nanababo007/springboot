@@ -1,7 +1,9 @@
 package com.kdhppo.smplcms.svc;
 
+import java.util.List;
 import java.util.Optional;
 
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.kdhppo.smplcms.dao.MembDao;
@@ -37,6 +39,56 @@ public class MembSvc {
 		if(isGetPw) {membReqInfo.setUserPw("1");}
 		membReqInfo.setMembId(userId);
 		return membDao.getMembInfo(membReqInfo);
+	}
+
+	/**
+	 * 회원 목록 조회
+	 * @return 회원 목록
+	 */
+	public List<MembResVo> getMembList(MembReqVo membReqVo){
+		return membDao.getMembList(membReqVo);
+	}
+
+	/**
+	 * 회원 상세정보 조회
+	 * @return 회원 상세정보
+	 */
+	public MembResVo getMembInfo(MembReqVo membReqVo) {
+		Optional<MembResVo> menbInfoOpt = membDao.getMembInfo(membReqVo);
+		MembResVo membInfo = menbInfoOpt.orElseThrow(() -> new UsernameNotFoundException(membReqVo.getMembId()+" is not member."));
+		return membInfo;
+	}
+
+	/**
+	 * 회원 정보 확인
+	 * @return 회원 정보 확인 결과 건수
+	 */
+	public int checkMembInfo(MembReqVo membReqVo) {
+		return membDao.checkMembInfo(membReqVo);
+	}
+
+	/**
+	 * 회원 정보 등록
+	 * @return 회원 정보 등록 결과 건수
+	 */
+	public int insertMembInfo(MembReqVo membReqVo) {
+		return membDao.insertMembInfo(membReqVo);
+	}
+
+	/**
+	 * 회원 정보 변경
+	 * @return 회원 정보 변경 결과 건수
+	 */
+	public int updateMembInfo(MembReqVo membReqVo) {
+		return membDao.updateMembInfo(membReqVo);
+	}
+
+	/**
+	 * 회원 정보 삭제
+	 * @return 회원 정보 삭제 결과 건수
+	 */
+	public int deleteMembInfo(MembReqVo membReqVo) {
+		return membDao.deleteMembInfo(membReqVo);
 	}
 
 }
